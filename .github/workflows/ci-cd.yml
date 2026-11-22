@@ -1,0 +1,46 @@
+
+name: OrderLab CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Ruff lint
+        run: ruff check .
+
+      - name: Ruff format check
+        run: ruff format --check .
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Generate HTML report
+        run: python generate_report.py
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: orderlab-html-report
+          path: site/index.html
