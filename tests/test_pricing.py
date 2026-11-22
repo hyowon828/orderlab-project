@@ -41,5 +41,6 @@ def test_discount_over_100():
 
 
 def test_intentional_ci_failure():
-    assert 1 == 2
-
+    actual = subtotal(10_000, 2)
+    expected = 30_000
+    assert actual == expected
