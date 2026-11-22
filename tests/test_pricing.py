@@ -38,3 +38,8 @@ def test_discount_below_zero():
 def test_discount_over_100():
     with pytest.raises(ValueError, match="invalid discount"):
         final_total(10_000, 2, 101)
+
+
+def test_intentional_ci_failure():
+    assert 1 == 2
+
