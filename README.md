@@ -16,3 +16,4 @@ Python CI/CD Practice
 
 \- GitHub Actions Pull Request 자동 검증
 
+Verify CI/CD deployment conditions
